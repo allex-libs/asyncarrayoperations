@@ -23,7 +23,8 @@ function createAsyncMap (lib, mylib) {
   function asyncmap (arry, func) {
     var res, d = q.defer(), ret = d.promise;
     if (!lib.isArray(arry)) {
-      return null;
+      d.reject(new Error('Array was not provided to asyncmap'));
+      return ret;
     }
     res = [];
     asyncmapstep(arry, func, d, res, 0);

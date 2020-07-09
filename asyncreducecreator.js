@@ -23,7 +23,8 @@ function createAsyncReduce (lib, mylib) {
   function asyncreduce (arry, func, accumulator) {
     var d = q.defer(), ret = d.promise;
     if (!lib.isArray(arry)) {
-      return null;
+      d.reject(new Error('Array was not provided to asyncmap'));
+      return ret;
     }
     asyncreducestep(arry, func, d, accumulator, 0);
     return ret;
